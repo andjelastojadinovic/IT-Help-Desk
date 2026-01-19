@@ -1,0 +1,533 @@
+{
+  "info": {
+    "_postman_id": "7cf80bad-c418-41cd-ba27-17faffb73936",
+    "name": "ITHelpDesk Copy",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Tickets",
+      "item": [
+        {
+          "name": "create ticket",
+          "id": "43c55b51-7eb2-4841-91b6-72f0a1dd82e2",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Printer ne radi\",\r\n  \"description\": \"Ne reaguje dugme\",\r\n  \"priority\": \"HIGH\",\r\n  \"category\": \"Hardware\",\r\n  \"createdBy\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/tickets",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "tickets"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all tickets",
+          "id": "80070656-d838-42bc-8a95-a843e545948b",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/tickets",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "tickets"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get ticket by id",
+          "id": "7a0dc794-eb6f-4d7b-9b5b-afa588b6c06c",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/tickets/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "tickets",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update ticket",
+          "id": "038dd1bb-09d0-43d3-ae5d-6d50c5019d90",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Naslov3\",\r\n    \"description\": \"Opis3\",\r\n    \"status\": \"OPEN\",\r\n    \"priority\": \"LOW\",\r\n    \"category\": \"SOFTWARE\",\r\n    \"assignedTo\": 1\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/tickets/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "tickets",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "change status",
+          "id": "961275fd-c6de-4357-86d0-2d0237f03bdd",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/tickets/1/status?status=IN_PROGRESS&userId=1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "tickets",
+                "1",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "IN_PROGRESS"
+                },
+                {
+                  "key": "userId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "change priority",
+          "id": "d738a363-0631-4bb2-b3cc-cce85792c31b",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/tickets/1/priority?priority=MEDIUM",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "tickets",
+                "1",
+                "priority"
+              ],
+              "query": [
+                {
+                  "key": "priority",
+                  "value": "MEDIUM"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "filter tickets",
+          "id": "02e91574-595f-4d6d-b15b-160aecc20853",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/tickets/filter?status=OPEN",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "tickets",
+                "filter"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "OPEN"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "assign a user to a ticket",
+          "id": "6d6424de-7e7a-4143-bc4c-fc3009d714dc",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/tickets/1/assign?userId=3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "tickets",
+                "1",
+                "assign"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "63afff89-c449-4b6a-a8c4-8dd157178e7f"
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "assigned tickets",
+          "id": "0cea50e8-bf99-40b6-a339-feca98325108",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/users/3/assignedTickets",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "users",
+                "3",
+                "assignedTickets"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all users",
+          "id": "8c2c230f-17f8-4296-a53d-b1ce563997fa",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get user by id",
+          "id": "271fd6f6-4ee2-4ab0-a958-91d2adafed4e",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/users/4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "users",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "5addba39-18c4-468c-86d4-318f4b32ad81"
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "register",
+          "id": "b3c0105c-82c5-4a1a-ab0e-ef9d336b6c9d",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"firstName\": \"Milica\",\r\n  \"lastName\": \"Mitic\",\r\n  \"username\": \"milica\",\r\n  \"password\": \"milica1\",\r\n  \"email\": \"milica@gmail.com\",\r\n  \"role\": \"IT_SUPPORT\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "id": "b6a25a0c-55b4-4cc6-83da-16d182ef842b",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"milica\",\r\n  \"password\": \"milica1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "57dfb76e-55ca-4ffc-bd62-d9b0e5fe2388"
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "create comment",
+          "id": "51cda832-9885-4c74-9f7e-f9af19603351",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"id\": 3,\r\n  \"ticketId\": 2,\r\n  \"authorId\": 4,\r\n  \"text\": \"Komentar3\",\r\n  \"createdAt\": \"18/01/2026\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/comments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all comments",
+          "id": "e6809556-7c0c-4df2-80b4-a768faa01d09",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/comments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "d7b96706-c1f8-4c86-932a-670563467195"
+    },
+    {
+      "name": "Status Logs",
+      "item": [
+        {
+          "name": "get all status logs",
+          "id": "da449641-ac8d-4f4e-bce4-61b02336b3c4",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/tickets/1/logs",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "tickets",
+                "1",
+                "logs"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete status log",
+          "id": "8e51d596-b5b0-4028-a3b8-1557dc3cb102",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ITHelpDesk/api/logs/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ITHelpDesk",
+                "api",
+                "logs",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "f38544ea-e2a8-4cf2-84d2-70d35a1434a6"
+    }
+  ]
+}
