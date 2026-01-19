@@ -12,91 +12,91 @@ Svi funkcionalni zahtevi iz postavke zadatka su implementirani.
 
 ### Korisnici
 
-Pregled liste korisnika
-GET /api/users
-Implementirano u UserRest klasi.
-Vraća listu svih korisnika.
+#### Pregled liste korisnika
+- GET /api/users
+- Implementirano u UserRest klasi.
+- Vraća listu svih korisnika.
 
-Pregled liste korisnika
-GET /api/users/{id}
-Implementirano u UserRest klasi.
-Vraća listu svih korisnika.
+#### Pregled liste korisnika
+- GET /api/users/{id}
+- Implementirano u UserRest klasi.
+- Vraća listu svih korisnika.
 
-Registracija korisnika
-POST /api/auth/register
-Implementirano u AuthRest klasi.
-Kreira novog korisnika sa osnovnim podacima (ime, prezime, username, email, lozinka, uloga).
+#### Registracija korisnika
+- POST /api/auth/register
+- Implementirano u AuthRest klasi.
+- Kreira novog korisnika sa osnovnim podacima (ime, prezime, username, email, lozinka, uloga).
 
-Logovanje korisnika
-POST /api/auth/login
-Implementirano u AuthRest klasi.
-Proverava kredencijale i omogućava autentifikaciju korisnika.
+#### Logovanje korisnika
+- POST /api/auth/login
+- Implementirano u AuthRest klasi.
+- Proverava kredencijale i omogućava autentifikaciju korisnika.
 
 ### Servisni zahtevi (Tickets)
 
-Kreiranje servisnog zahteva
-POST /api/tickets
-Implementirano u TicketRest, metod za kreiranje zahteva.
-Kreira novi ticket sa naslovom, opisom, kategorijom, prioritetom i autorom.
+#### Kreiranje servisnog zahteva
+- POST /api/tickets
+- Implementirano u TicketRest, metod za kreiranje zahteva.
+- Kreira novi ticket sa naslovom, opisom, kategorijom, prioritetom i autorom.
 
-Pregled liste servisnih zahteva
-GET /api/tickets
-Implementirano u TicketRest.
-Vraća listu svih zahteva.
+#### Pregled liste servisnih zahteva
+- GET /api/tickets
+- Implementirano u TicketRest.
+- Vraća listu svih zahteva.
 
-Filtriranje zahteva
-GET /api/tickets/filter
-Implementirano u TicketDAO i TicketService.
-Omogućava filtriranje po statusu, kategoriji, prioritetu, ključnim rečima, opsegu datuma.
+#### Filtriranje zahteva
+- GET /api/tickets/filter
+- Implementirano u TicketDAO i TicketService.
+- Omogućava filtriranje po statusu, kategoriji, prioritetu, ključnim rečima, opsegu datuma.
 
-Detaljan prikaz servisnog zahteva
-GET /api/tickets/{id}
-Implementirano u TicketRest.
-Vraća sve podatke o jednom ticket-u.
+#### Detaljan prikaz servisnog zahteva
+- GET /api/tickets/{id}
+- Implementirano u TicketRest.
+- Vraća sve podatke o jednom ticket-u.
 
 ### Izmena zahteva
 
-Izmena zahteva
-PUT /api/tickets/{id}
-Implementirano u TicketRest.
-Omogućava izmenu bilo kojeg polja servisnog zahteva.
+#### Izmena zahteva
+- PUT /api/tickets/{id}
+- Implementirano u TicketRest.
+- Omogućava izmenu bilo kojeg polja servisnog zahteva.
 
-Izmena statusa zahteva
-PUT /api/tickets/{id}/status
-Implementirano u TicketRest.
-Prilikom izmene statusa ažurira se status u tabeli tickets, automatski se kreira zapis u tabeli status_logs.
+#### Izmena statusa zahteva
+- PUT /api/tickets/{id}/status
+- Implementirano u TicketRest.
+- Prilikom izmene statusa ažurira se status u tabeli tickets, automatski se kreira zapis u tabeli status_logs.
 
-Izmena prioriteta zahteva
-PUT /api/tickets/{id}/priority
-Implementirano u TicketRest.
-Omogućava izmenu prioriteta zahteva.
+#### Izmena prioriteta zahteva
+- PUT /api/tickets/{id}/priority
+- Implementirano u TicketRest.
+- Omogućava izmenu prioriteta zahteva.
 
-Dodela zahteva IT radniku
-PATCH /api/tickets/{id}/assign
-Implementirano u TicketRest.
-Dodeljuje ticket određenom korisniku (IT radniku).
+#### Dodela zahteva IT radniku
+- PATCH /api/tickets/{id}/assign
+- Implementirano u TicketRest.
+- Dodeljuje ticket određenom korisniku (IT radniku).
 
 ### Komentari i istorija promena
 
-Dodavanje komentara na zahtev
-POST /api/comments
-Implementirano u CommentRest.
-Dodaje komentar za određeni ticket.
+#### Dodavanje komentara na zahtev
+- POST /api/comments
+- Implementirano u CommentRest.
+- Dodaje komentar za određeni ticket.
 
-Pregled svih komentara
-GET /api/comments
-Implementirano u CommentRest.
-Vraća listu svih komentara.
+#### Pregled svih komentara
+- GET /api/comments
+- Implementirano u CommentRest.
+- Vraća listu svih komentara.
 
-Pregled istorije promena statusa
-GET /api/tickets/{id}/logs
-Implementirano u TicketRest.
-Vraća kompletnu istoriju promena statusa zahteva.
+#### Pregled istorije promena statusa
+- GET /api/tickets/{id}/logs
+- Implementirano u TicketRest.
+- Vraća kompletnu istoriju promena statusa zahteva.
 
-Pregled zahteva dodeljenih korisniku
-GET /api/users/{id}/assignedTickets
-Implementirano u UserRest.
-Vraća sve tickete koji su dodeljeni određenom IT radniku.
+#### Pregled zahteva dodeljenih korisniku
+- GET /api/users/{id}/assignedTickets
+- Implementirano u UserRest.
+- Vraća sve tickete koji su dodeljeni određenom IT radniku.
 
 ## Arhitektura i dizajn sistema
 
@@ -191,13 +191,16 @@ Ove izmene poboljšavaju čitljivost i konzistentnost API-ja.
 
 ## Upravljanje podacima i validacija
 
-Validacija podataka
+### Validacija podataka
+
 Osnovne validacije (postojanje entiteta, validni ENUM statusi) vrše se u servisnom sloju.
 
-Konzistentnost podataka
+### Konzistentnost podataka
+
 Prilikom izmene statusa ažurira se ticket i dodaje se novi status log čime se obezbeđuje doslednost sistema.
 
-Bezbednost
+### Bezbednost
+
 Lozinke se ne čuvaju u otvorenom obliku već se obrađuju pre skladištenja u bazu.
 
 ## Testiranje sistema
