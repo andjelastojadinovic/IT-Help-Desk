@@ -1,15 +1,16 @@
-IT Help Desk sistem – Dokumentacija dizajnerskih i implementacionih odluka
-1. Uvod
+# IT Help Desk sistem – Dokumentacija dizajnerskih i implementacionih odluka
+
+## Uvod
 
 Ovaj dokument detaljno opisuje arhitektonske i implementacione odluke donete tokom razvoja REST API serverske aplikacije za IT Help Desk sistem, čija je svrha evidencija i obrada servisnih zahteva IT podrške u okviru jedne organizacije.
 
 Aplikacija je realizovana kao slojevita Java REST API aplikacija, bez front-end dela. Sve funkcionalnosti su demonstrirane putem Postman REST poziva.
 
-2. Funkcionalni zahtevi i implementacija
+## Funkcionalni zahtevi i implementacija
 
 Svi funkcionalni zahtevi iz postavke zadatka su implementirani.
 
-2.1. Korisnici
+### Korisnici
 
 Pregled liste korisnika
 GET /api/users
@@ -31,7 +32,7 @@ POST /api/auth/login
 Implementirano u AuthRest klasi.
 Proverava kredencijale i omogućava autentifikaciju korisnika.
 
-2.2. Servisni zahtevi (Tickets)
+### Servisni zahtevi (Tickets)
 
 Kreiranje servisnog zahteva
 POST /api/tickets
@@ -44,7 +45,7 @@ Implementirano u TicketRest.
 Vraća listu svih zahteva.
 
 Filtriranje zahteva
-GET /api/tickets?status=&category=&priority=&keyword=&fromDate=&toDate=
+GET /api/tickets/filter
 Implementirano u TicketDAO i TicketService.
 Omogućava filtriranje po statusu, kategoriji, prioritetu, ključnim rečima, opsegu datuma.
 
@@ -53,7 +54,7 @@ GET /api/tickets/{id}
 Implementirano u TicketRest.
 Vraća sve podatke o jednom ticket-u.
 
-2.3. Izmena zahteva
+### Izmena zahteva
 
 Izmena zahteva
 PUT /api/tickets/{id}
@@ -61,12 +62,12 @@ Implementirano u TicketRest.
 Omogućava izmenu bilo kojeg polja servisnog zahteva.
 
 Izmena statusa zahteva
-PUT /api/tickets/{id}/status?status=&userId=
+PUT /api/tickets/{id}/status
 Implementirano u TicketRest.
 Prilikom izmene statusa ažurira se status u tabeli tickets, automatski se kreira zapis u tabeli status_logs.
 
 Izmena prioriteta zahteva
-PUT /api/tickets/{id}/priority?priority=
+PUT /api/tickets/{id}/priority
 Implementirano u TicketRest.
 Omogućava izmenu prioriteta zahteva.
 
@@ -75,7 +76,7 @@ PATCH /api/tickets/{id}/assign
 Implementirano u TicketRest.
 Dodeljuje ticket određenom korisniku (IT radniku).
 
-2.4. Komentari i istorija promena
+### Komentari i istorija promena
 
 Dodavanje komentara na zahtev
 POST /api/comments
@@ -97,18 +98,18 @@ GET /api/users/{id}/assignedTickets
 Implementirano u UserRest.
 Vraća sve tickete koji su dodeljeni određenom IT radniku.
 
-3. Arhitektura i dizajn sistema
+## Arhitektura i dizajn sistema
 
 Sistem je razvijen kao REST API serverska aplikacija, koristeći troslojnu arhitekturu.
 
-3.1. REST sloj
+### REST sloj
 
 Paketi: org.example.rest
 
 Klase:
 AuthRest, UserRest, TicketRest, CommentRest, StatusLogRest
 
-3.2. Service sloj
+### Service sloj
 
 Paketi: org.example.service
 
@@ -117,7 +118,7 @@ Sadrži poslovnu logiku sistema, koordinira operacije nad više DAO klasa, imple
 Klase:
 UserService, TicketService, CommentService, StatusLogService
 
-3.3. DAO sloj
+### DAO sloj
 
 Paketi: org.example.dao
 
@@ -126,7 +127,7 @@ Direktna komunikacija sa bazom podataka, izvršavanje SQL upita korišćenjem JD
 Klase:
 UserDAO, TicketDAO, CommentDAO, StatusLogDAO
 
-3.4. Model sloj
+### Model sloj
 
 Paketi: org.example.model
 
@@ -136,10 +137,10 @@ User, Ticket, Comment, StatusLog
 Korišćene su enumeracije:
 TicketStatus, TicketPriority, Role
 
-4. Dizajnerske odluke i ispravke specifikacije
-4.1. Ispravke modela baze podataka
+## Dizajnerske odluke i ispravke specifikacije
+### Ispravke modela baze podataka
 
-4.1.1. Standardizacija naziva
+#### Standardizacija naziva
 
 Sva imena tabela i polja su preimenovana na isti jezik i u skladu sa uobičajenim konvencijama imenovanja u bazama podataka
 
@@ -147,7 +148,7 @@ Primeri standardizovanih naziva: created_at, assigned_to, changed_at
 
 Na ovaj način postignuta je doslednost u imenovanju i olakšano dalje proširivanje sistema.
 
-4.1.2. Definisanje jasnih relacija
+#### Definisanje jasnih relacija
 
 Relacije između ključnih entiteta su jasno definisane putem stranih ključeva:
 
@@ -159,18 +160,18 @@ tickets.assigned_to → users.id
 
 Ovakav pristup eliminiše nejasnoće iz originalnog modela i omogućava pouzdano povezivanje podataka unutar sistema.
 
-4.1.3. Status i prioritet zahteva
+#### Status i prioritet zahteva
 
 Polja status i priority nisu modelovana kao posebne tabele u bazi, već su definisana kao ENUM vrednosti na nivou aplikacije.
 Ova odluka doneta je zbog jednostavnije validacije podataka, smanjenja složenosti baze, jasne kontrole dozvoljenih vrednosti u poslovnoj logici
 Promene statusa zahteva dodatno se evidentiraju kroz posebnu tabelu za istoriju promena (status log), čime se obezbeđuje potpuna sledljivost izmena.
 
-4.1.4. 
+#### Uloga korisnika 
 
 U tabeli users, uloga korisnika je definisana ENUM poljem role. 
 Na ovaj način jasno su razdvojene odgovornosti korisnika u sistemu.
 
-4.2. Ispravke REST API poziva
+### Ispravke REST API poziva
 
 Originalni API pozivi nisu bili u potpunosti konzistentni.
 
@@ -180,7 +181,7 @@ GET /api/ticket - /api/tickets: Naziv resursa je promenjen u množinu zbog konzi
 GET /api/tickets/{id}: Nepromenjeno.
 PUT /api/tickets/status/{id} - /api/tickets/{id}/status: Identifikator zahteva je premešten uz resurs, čime je putanja postala jasnija.
 Status i ID korisnika koji vrši promenu prosleđuju se kao query parametri.
-PATCH /api/ticket/{id}/assign - /api/tickets/{id}/assign: Naziv resursa je standardizovan tickets.
+PATCH /api/ticket/{id}/assign - /api/tickets/{id}/assign: Naziv resursa je standardizovan kao tickets.
 ID korisnika kojem je dodeljen zahtev se prosleđuje kao querz paramentar.
 POST /api/comments: Nepromenjeno.
 GET /api/tickets/{id}/logs: Nepromenjeno.
@@ -188,7 +189,7 @@ GET /api/users/{id}/assignedTickets: Nepromenjeno.
 
 Ove izmene poboljšavaju čitljivost i konzistentnost API-ja.
 
-5. Upravljanje podacima i validacija
+## Upravljanje podacima i validacija
 
 Validacija podataka
 Osnovne validacije (postojanje entiteta, validni ENUM statusi) vrše se u servisnom sloju.
@@ -199,23 +200,18 @@ Prilikom izmene statusa ažurira se ticket i dodaje se novi status log čime se 
 Bezbednost
 Lozinke se ne čuvaju u otvorenom obliku već se obrađuju pre skladištenja u bazu.
 
-6. Testiranje sistema
+## Testiranje sistema
 
 Sve funkcionalnosti su testirane korišćenjem Postman alata.
 
 Kreirana je Postman kolekcija sa primerima:
+- registracije i logovanja,
+- CRUD operacija nad zahtevima,
+- komentara,
+- status log-ova,
+- filtriranja.
 
-registracije i logovanja,
-
-CRUD operacija nad zahtevima,
-
-komentara,
-
-status log-ova,
-
-filtriranja.
-
-7. Zaključak
+## Zaključak
 
 Razvijena REST API aplikacija u potpunosti ispunjava sve zahteve zadatka IT Help Desk sistem.
 Nejasnoće i nedoslednosti iz specifikacije su identifikovane, ispravljene i obrazložene.
